@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1554219163 source:d:\mis documentos\gaby\tecnicatura\programacion-laboratorio ii\tps\tplabo2\cadena.c
+	"cadena.h"
+
+1554219163 d:\mis documentos\gaby\tecnicatura\programacion-laboratorio ii\tps\tplabo2\cadena.h
+
+1554238881 source:d:\mis documentos\gaby\tecnicatura\programacion-laboratorio ii\tps\tplabo2\main.c
+	<stdio.h>
+	<stdlib.h>
+	"cadena.h"
+	"libro.h"
+	"consola.h"
+
+1554238168 source:d:\mis documentos\gaby\tecnicatura\programacion-laboratorio ii\tps\tplabo2\libro.c
+	"libro.h"
+
+1554230910 d:\mis documentos\gaby\tecnicatura\programacion-laboratorio ii\tps\tplabo2\libro.h
+	"string.h"
+
+1554232290 d:\mis documentos\gaby\tecnicatura\programacion-laboratorio ii\tps\tplabo2\consola.h
+	"libro.h"
+
+1554239276 source:d:\mis documentos\gaby\tecnicatura\programacion-laboratorio ii\tps\tplabo2\consola.c
+	"consola.h"
+	"libro.h"
+	<stdio.h>
+

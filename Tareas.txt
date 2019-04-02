@@ -1,0 +1,24 @@
+Software para mejorar proceso de ventas
+
+
+1-Gestion Libros
+	-agregar al sistema //
+	-listarlos //
+		-búsquedas a través del ISBN, título y autor
+	-editarlos
+		-ver el "antes y el después" antes de confirmar
+	-eliminarlos
+2-Venta de ejemplares
+	-el usuario verá un listado y realizara busqueda e ingresara los ISBN
+	-mostrar datos
+		-nombre libro, autor, ISBN, precio y stock
+	-informar libros sin stock
+	-mostrar datos hasta confirmacion o cancelacion
+	-cancelacion
+		-vuelve al menu principal
+	-confirmacion
+		-generar la factura digital
+		-incrementar en 1 el stock reservado de los libros involucrados
+	-"Retirar el libro por sucursal" o "Envío a domicilio":
+		
+3-Entrega de articulos comprados
