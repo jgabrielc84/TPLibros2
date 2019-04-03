@@ -26,7 +26,7 @@ void crearLibroPorConsola(ST_LIBRO libros[]){
 }
 
 void crearLibro(const char *titulo, const ST_AUTOR autor, const double precio, const char *ISBN, int stockDisponible, int stockReservado, ST_LIBRO libros[]){
-    for(int i = 0; i < cant_lib; i++){
+    for(int i = 0; i < CANT_LIBROS; i++){
             //cambiar a usar cadena.h
         if(strcmp(libros[i].ISBN, "") == 0){//*libros[i].ISBN == '\0'){
             strcpy(libros[i].titulo, titulo);
@@ -46,7 +46,7 @@ ST_AUTOR crearAutor(const char *nombre, const char *apellido){
     return autor;
 }
 
-void inicializarLibros (ST_LIBRO libros [], int N) {
+void inicializarLibros (ST_LIBRO libros[], int N) {
     for (int i=0; i<N; i++){
         strcpy(libros[i].titulo, "");
         libros[i].autor = crearAutor("","");

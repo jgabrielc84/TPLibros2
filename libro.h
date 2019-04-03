@@ -1,7 +1,12 @@
 #ifndef LIBRO_H_INCLUDED
 #define LIBRO_H_INCLUDED
+
+#include <stdio.h>
 #include "string.h"
-#define cant_lib 50
+
+#define CANT_LIBROS 50
+
+
 typedef struct{
     char nombre[20];
     char apellido[20];
