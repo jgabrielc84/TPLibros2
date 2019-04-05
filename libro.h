@@ -21,11 +21,11 @@ typedef struct{
     int stockReservado;
 }ST_LIBRO;
 
-void inicializar (ST_LIBRO);
+void inicializarLibros(ST_LIBRO libros[], int N);
 
 //ST_LIBRO crearLibro(const char *titulo, const ST_AUTOR autor, const double precio, const char *ISBN, int stockDisponible, int stockReservado);
 void crearLibro(const char *titulo, const ST_AUTOR autor, const double precio, const char *ISBN, int stockDisponible, int stockReservado, ST_LIBRO libros[]);
-void crearLibroPorConsola(ST_LIBRO libros[]);
+
 
 ST_AUTOR crearAutor(const char *nombre, const char *apellido);
 

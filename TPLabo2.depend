@@ -30,10 +30,10 @@
 
 1554219163 d:\mis documentos\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\cadena.h
 
-1554316138 source:d:\mis documentos\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\libro.c
+1554344592 source:d:\mis documentos\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\libro.c
 	"libro.h"
 
-1554316126 d:\mis documentos\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\libro.h
+1554344597 d:\mis documentos\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\libro.h
 	<stdio.h>
 	"string.h"
 
@@ -44,10 +44,11 @@
 	"libro.h"
 	"consola.h"
 
-1554316161 d:\mis documentos\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\consola.h
+1554344746 d:\mis documentos\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\consola.h
+	<stdlib.h>
 	"libro.h"
 
-1554321579 source:d:\mis documentos\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\consola.c
+1554345488 source:d:\mis documentos\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\consola.c
 	"consola.h"
 	"libro.h"
 
