@@ -1,57 +1,6 @@
 #include "consola.h"
 #include "libro.h"
 
-
-void iniciarConsola(ST_LIBRO libros[]){
-        int N = 0;
-        system("cls");
-        printf("Bienvenidos al sistema\n\n");
-        printf("[1] - Gestion de libros\n");
-        printf("[2] - Venta de libros\n");
-        printf("[3] - Entrega de libros comprados\n\n");
-        printf("Opcion: ");
-        scanf("%i", &N);
-
-        switch (N){
-            case 1:
-                system("cls");
-                gestionConsola(libros);
-                break;
-        }
-}
-
-
-void gestionConsola(ST_LIBRO libros[]){
-        int N = -1;
-        printf("Gestion de libros\n\n");
-        printf("[1] - Crear libro\n");
-        printf("[2] - Buscar libro\n");
-        printf("[3] - Listar libros\n");
-        printf("[4] - Editar libros\n");
-        printf("[5] - Eliminar libros\n");
-        printf("[0] - Volver\n\n");
-        printf("Opcion: ");
-        scanf("%i", &N);
-
-        switch (N){
-        case 1:
-            crearLibroPorConsola(libros);
-            gestionConsola(libros);
-            break;
-        case 3:
-            system("cls");
-            listarLibros(libros);
-            printf("\n");
-            gestionConsola(libros);
-            break;
-        case 4:
-            editarLibros(libros);
-            gestionConsola(libros);
-            break;
-        }
-}
-
-
 void crearLibroPorConsola(ST_LIBRO libros[]){
     char titulo[50];
     double precio;
@@ -105,16 +54,21 @@ int buscarPorISBN(const char *ISBN, ST_LIBRO libros[]){
     return -1;//Error
 }
 
+
 //Despues modificar de a uno
 void editarLibros(ST_LIBRO libros[]){
     char cadena[10+1];
     char titulo[50+1];
     char nombreAutor[50];
     char apellidoAutor[50];
-    double precio;
+    double *precio;
     //char ISBN[10];
-    int stockDisponible;
-    int stockReservado;
+    int *stockDisponible;
+    int *stockReservado;
+
+    precio = (double *)(malloc(sizeof(double)));
+    stockDisponible = (int *)(malloc(sizeof(int)));
+    stockReservado = (int *)(malloc(sizeof(int)));
 
     printf("\n");
     printf("Ingresar el ISBN a buscar: ");
@@ -133,35 +87,88 @@ void editarLibros(ST_LIBRO libros[]){
     printf("Autor\nApellido: %s\n", libros[pos].autor.apellido);
     printf("Ingrese nuevo apellido: ");
     scanf("%[^\n]50s", apellidoAutor);
-    while(getchar()!='\n')// limpia el bufer del teclado
+    while(getchar()!='\n');// limpia el bufer del teclado
     strcpy(libros[pos].autor.apellido, apellidoAutor);
-    printf("Apellido: %s\n", libros[pos].autor.apellido);
+    printf("Apellido: %s\n\n", libros[pos].autor.apellido);
 
     printf("Nombre: %s\n", libros[pos].autor.nombre);
     printf("Ingrese nuevo nombre: ");
     scanf("%[^\n]s", nombreAutor);
     while(getchar()!='\n');// limpia el bufer del teclado
     strcpy(libros[pos].autor.nombre, nombreAutor);
-    printf("Nombre: %s\n", libros[pos].autor.nombre);
+    printf("Nombre: %s\n\n", libros[pos].autor.nombre);
 
     printf("Precio: %5.2f\n", libros[pos].precio);
     printf("Ingrese nuevo precio: ");
-    scanf("%lf", &precio);
-    libros[pos].precio = precio;
-    printf("Precio: %f\n", libros[pos].precio);
+    scanf("%lf", precio);
+    while(getchar()!='\n');// limpia el bufer del teclado
+    libros[pos].precio = *precio;
+    printf("Precio: %5.2f\n\n", libros[pos].precio);
 
     printf("Stock disponible: %i\n", libros[pos].stockDisponible);
     printf("Ingrese nuevo stock disponible: ");
-    scanf("%i", &stockDisponible);
-    libros[pos].stockDisponible = stockDisponible;
-    printf("Stock disponible: %i\n", libros[pos].stockDisponible);
+    scanf("%i", stockDisponible);
+    while(getchar()!='\n');// limpia el bufer del teclado
+    libros[pos].stockDisponible = *stockDisponible;
+    printf("Stock disponible: %i\n\n", libros[pos].stockDisponible);
 
     printf("Stock reservado: %i\n", libros[pos].stockReservado);
     printf("Ingrese nuevo stock reservado: ");
-    scanf("%i", &stockReservado);
-    libros[pos].stockReservado = stockReservado;
-    printf("Stock reservado: %i\n", libros[pos].stockReservado);
-
+    scanf("%i", stockReservado);
+    while(getchar()!='\n');// limpia el bufer del teclado
+    libros[pos].stockReservado = *stockReservado;
+    printf("Stock reservado: %i\n\n", libros[pos].stockReservado);
 
     printf("\n");
 }
+
+
+void iniciarConsola(ST_LIBRO libros[]){
+        int N = 0;
+        system("cls");
+        printf("Bienvenidos al sistema\n\n");
+        printf("[1] - Gestion de libros\n");
+        printf("[2] - Venta de libros\n");
+        printf("[3] - Entrega de libros comprados\n\n");
+        printf("Opcion: ");
+        scanf("%i", &N);
+
+        switch (N){
+            case 1:
+                system("cls");
+                gestionConsola(libros);
+                break;
+        }
+}
+
+
+void gestionConsola(ST_LIBRO libros[]){
+        int N = -1;
+        printf("Gestion de libros\n\n");
+        printf("[1] - Crear libro\n");
+        printf("[2] - Buscar libro\n");
+        printf("[3] - Listar libros\n");
+        printf("[4] - Editar libros\n");
+        printf("[5] - Eliminar libros\n");
+        printf("[0] - Volver\n\n");
+        printf("Opcion: ");
+        scanf("%i", &N);
+
+        switch (N){
+        case 1:
+            crearLibroPorConsola(libros);
+            gestionConsola(libros);
+            break;
+        case 3:
+            system("cls");
+            listarLibros(libros);
+            printf("\n");
+            gestionConsola(libros);
+            break;
+        case 4:
+            editarLibros(libros);
+            gestionConsola(libros);
+            break;
+        }
+}
+

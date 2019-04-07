@@ -8,7 +8,7 @@
 
 int main()
 {
-    ST_LIBRO libros [CANT_LIBROS];
+    ST_LIBRO libros[CANT_LIBROS];
     inicializarLibros(libros, CANT_LIBROS);
     crearLibro("La vida de Paula", crearAutor("Paula", "Monti"), 20.0, "11", 5000, 1, libros);
     crearLibro("La vida de Gabriel", crearAutor("Juan Gabriel", "Chavez"), 10.0, "987256202", 5, 0, libros);
