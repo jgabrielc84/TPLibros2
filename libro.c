@@ -1,7 +1,6 @@
 #include "libro.h"
 
 int buscarLibroVacio (FILE*f){
-    int i = 0;
     int cont = -1;
     ST_LIBRO libro;
     fseek(f,0,SEEK_SET);
@@ -9,14 +8,11 @@ int buscarLibroVacio (FILE*f){
         fread(&libro, sizeof(ST_LIBRO),1,f);
         cont ++;
         if (strcmp(libro.ISBN,"")==0){
-            i=cont;
-            return i;
+            return cont;
             }
-        else{
-            i = contarLibros(f);
+
             }
-        }
-    return i;
+    return cont;
 }
 
 
@@ -32,7 +28,7 @@ int contarLibros (FILE*f){
 }
 
 void crearLibroPorConsola(FILE *f){
-    int cont = (buscarLibroVacio(f)-1);
+    int cont = buscarLibroVacio(f);
     ST_LIBRO libro;
     printf("Ingresar el ISBN del libro\n");
     scanf("%s", libro.ISBN);

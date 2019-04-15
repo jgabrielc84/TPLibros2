@@ -53,12 +53,12 @@ void buscarLibro (FILE*f){
         printf("[2] - Buscar libro por titulo o autor\n");
         printf("[3] - Volver\n");
         scanf("%d", &N);
-        int i;
+        int libroiesimo;
         switch (N){
         case 1:
-            i = buscarLibroPorISBN (f);
-            mostrarLibroIesimo(i,f);
-            gestionarLibro(i,f);
+            libroiesimo = buscarLibroPorISBN (f);
+            mostrarLibroIesimo(libroiesimo,f);
+            gestionarLibro(libroiesimo,f);
             break;
         case 2:
 
@@ -71,7 +71,7 @@ void buscarLibro (FILE*f){
 
 }
 
-void gestionarLibro (int i, FILE *f){
+void gestionarLibro (int libroiesimo, FILE *f){
         int N = -1;
         printf("\n[1] - Editar libro\n");
         printf("[2] - Eliminar libro\n");
@@ -81,7 +81,7 @@ void gestionarLibro (int i, FILE *f){
         case 1:
             break;
         case 2:
-            eliminarLibro(i,f);
+            eliminarLibro(libroiesimo,f);
             gestionConsola(f);
             break;
         case 3:
