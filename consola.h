@@ -1,13 +1,10 @@
 #ifndef CONSOLA_H_INCLUDED
 #define CONSOLA_H_INCLUDED
-
+#include <stdio.h>
 #include <stdlib.h>
-#include "libro.h"
+#include <string.h>
 
-void iniciarConsola (ST_LIBRO libros[]);
-
-void gestionConsola (ST_LIBRO libros[]);
-
-//void crearLibroPorConsola(ST_LIBRO libros[]);
+void iniciarConsola (FILE *f);
+void gestionConsola (FILE *f);
 
 #endif // CONSOLA_H_INCLUDED

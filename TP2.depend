@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1555312530 source:c:\users\administrador user\documents\sistemas\laboratorio\tp 2\tp2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"consola.h"
+	"libro.h"
+
+1553906275 c:\users\administrador user\documents\sistemas\laboratorio\tp 2\tp2\funciones.h
+
+1555311624 source:c:\users\administrador user\documents\sistemas\laboratorio\tp 2\tp2\consola.c
+	"consola.h"
+	"libro.h"
+
+1555300137 c:\users\administrador user\documents\sistemas\laboratorio\tp 2\tp2\consola.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1555306686 c:\users\administrador user\documents\sistemas\laboratorio\tp 2\tp2\libro.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1555312042 source:c:\users\administrador user\documents\sistemas\laboratorio\tp 2\tp2\libro.c
+	"libro.h"
+

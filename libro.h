@@ -1,11 +1,8 @@
 #ifndef LIBRO_H_INCLUDED
 #define LIBRO_H_INCLUDED
-
 #include <stdio.h>
-#include "string.h"
-
-#define CANT_LIBROS 50
-
+#include <stdlib.h>
+#include <string.h>
 
 typedef struct{
     char nombre[20];
@@ -21,13 +18,10 @@ typedef struct{
     int stockReservado;
 }ST_LIBRO;
 
-void inicializarLibros(ST_LIBRO libros[], int N);
-
-//ST_LIBRO crearLibro(const char *titulo, const ST_AUTOR autor, const double precio, const char *ISBN, int stockDisponible, int stockReservado);
-void crearLibro(const char *titulo, const ST_AUTOR autor, const double precio, const char *ISBN, int stockDisponible, int stockReservado, ST_LIBRO libros[]);
-
-
-ST_AUTOR crearAutor(const char *nombre, const char *apellido);
+int contarLibros (FILE*f);
+void crearLibroPorConsola(FILE *f);
+void listarLibros(FILE*f);
+int buscarLibroPorISBN (FILE*f);
 
 
 #endif // LIBRO_H_INCLUDED
