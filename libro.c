@@ -1,14 +1,14 @@
 #include "libro.h"
 
 int buscarLibroVacio (FILE*f){
-    int i = -1;
+    int i = 0;
     int cont = -1;
     ST_LIBRO libro;
     fseek(f,0,SEEK_SET);
     while (!feof(f)){
         fread(&libro, sizeof(ST_LIBRO),1,f);
         cont ++;
-        if (strcmp(libro.ISBN,"0")==0){
+        if (strcmp(libro.ISBN,"")==0){
             i=cont;
             return i;
             }
@@ -32,7 +32,7 @@ int contarLibros (FILE*f){
 }
 
 void crearLibroPorConsola(FILE *f){
-    int i = buscarLibroVacio(f);
+    int cont = (buscarLibroVacio(f)-1);
     ST_LIBRO libro;
     printf("Ingresar el ISBN del libro\n");
     scanf("%s", libro.ISBN);
@@ -48,7 +48,7 @@ void crearLibroPorConsola(FILE *f){
     scanf("%d", &libro.stockDisponible);
     printf("Ingresar el stock reservado\n");
     scanf("%d", &libro.stockReservado);
-    fseek(f,i*sizeof(ST_LIBRO),SEEK_SET);
+    fseek(f,cont*sizeof(ST_LIBRO),SEEK_SET);
     fwrite(&libro,sizeof(ST_LIBRO),1,f);
 }
 
@@ -56,12 +56,10 @@ void crearLibroPorConsola(FILE *f){
 
 void listarLibros(FILE*f){
     ST_LIBRO libro;
-    int i = 0;
+    fseek(f,0,SEEK_SET);
     while (!feof(f)){
-    fseek(f,(i*sizeof(ST_LIBRO)),SEEK_SET);
-    fread(&libro, sizeof(ST_LIBRO), 1, f);
-    mostrarLibro(libro);
-    i++;
+        fread(&libro, sizeof(ST_LIBRO), 1, f);
+        mostrarLibro(libro);
     }
 }
 
@@ -101,7 +99,7 @@ void mostrarLibroIesimo (int i, FILE *f){
 
 void eliminarLibro (int i, FILE*f){
         ST_LIBRO libro;
-        strcpy(libro.ISBN, "0");
+        strcpy(libro.ISBN, "");
         strcpy(libro.titulo, "");
         strcpy(libro.autor.apellido, "");
         strcpy(libro.autor.nombre, "");

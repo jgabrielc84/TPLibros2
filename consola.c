@@ -82,6 +82,7 @@ void gestionarLibro (int i, FILE *f){
             break;
         case 2:
             eliminarLibro(i,f);
+            gestionConsola(f);
             break;
         case 3:
             system("cls");

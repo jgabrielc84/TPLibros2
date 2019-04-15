@@ -8,8 +8,12 @@
 
 int main()
 {
+    FILE *fa = NULL;
+    if ((fa=fopen("libros", "ab+"))==NULL){
+        exit(EXIT_FAILURE);
+    }
     FILE *f = NULL;
-    if ((f=fopen("libros", "ab+"))==NULL){
+    if ((f=fopen("libros", "rb+"))==NULL){
         exit(EXIT_FAILURE);
     }
 
@@ -17,5 +21,6 @@ int main()
     iniciarConsola(f);
 
     fclose(f);
+    fclose(fa);
     return 0;
 }
