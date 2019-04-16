@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void iniciarConsola (FILE *f);
-void gestionConsola (FILE *f);
+void iniciarConsola (FILE *ptrArchivo);
+void gestionConsola (FILE *ptrArchivo);
 
 #endif // CONSOLA_H_INCLUDED

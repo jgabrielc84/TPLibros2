@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 typedef struct{
     char nombre[20];
@@ -18,10 +19,10 @@ typedef struct{
     int stockReservado;
 }ST_LIBRO;
 
-int contarLibros (FILE*f);
-void crearLibroPorConsola(FILE *f);
-void listarLibros(FILE*f);
-int buscarLibroPorISBN (FILE*f);
+int contarLibros (FILE*ptrArchivo);
+void crearLibroPorConsola(FILE *ptrArchivo);
+void listarLibros(FILE*ptrArchivo);
+int buscarLibroPorISBN (FILE*ptrArchivo);
 
 
 #endif // LIBRO_H_INCLUDED

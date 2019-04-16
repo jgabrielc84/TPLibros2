@@ -2,7 +2,7 @@
 #include "libro.h"
 
 
-void iniciarConsola (FILE*f){
+void iniciarConsola (FILE*ptrArchivo){
         int N = -1;
         system("cls");
         printf("Bienvenidos al sistema\n");
@@ -15,12 +15,12 @@ void iniciarConsola (FILE*f){
         switch (N){
             case 1:
                 system("cls");
-                gestionConsola(f);
+                gestionConsola(ptrArchivo);
                 break;
         }
 }
 
-void gestionConsola (FILE *f){
+void gestionConsola (FILE *ptrArchivo){
         int N = -1;
         printf("\n[1] - Crear libro\n");
         printf("[2] - Buscar libro\n");
@@ -29,24 +29,24 @@ void gestionConsola (FILE *f){
         scanf("%d", &N);
         switch (N){
         case 1:
-            crearLibroPorConsola(f);
-            gestionConsola(f);
+            crearLibroPorConsola(ptrArchivo);
+            gestionConsola(ptrArchivo);
             break;
         case 2:
-            buscarLibro(f);
+            buscarLibro(ptrArchivo);
             break;
         case 3:
             system("cls");
-            listarLibros(f);
-            gestionConsola(f);
+            listarLibros(ptrArchivo);
+            gestionConsola(ptrArchivo);
             break;
         case 4:
-            iniciarConsola(f);
+            iniciarConsola(ptrArchivo);
             break;
         }
 }
 
-void buscarLibro (FILE*f){
+void buscarLibro (FILE*ptrArchivo){
         int N = -1;
         system("cls");
         printf("\n[1] - Buscar libro por ISBN\n");
@@ -56,22 +56,43 @@ void buscarLibro (FILE*f){
         int libroiesimo;
         switch (N){
         case 1:
-            libroiesimo = buscarLibroPorISBN (f);
-            mostrarLibroIesimo(libroiesimo,f);
-            gestionarLibro(libroiesimo,f);
+            system("cls");
+            libroiesimo = buscarLibroPorISBN (ptrArchivo);
+            mostrarLibroIesimo(libroiesimo,ptrArchivo);
+            gestionarLibro(libroiesimo,ptrArchivo);
             break;
         case 2:
-
+            buscarLibroPorTituloOAutor(ptrArchivo);
+            seleccionarLibro(ptrArchivo);
             break;
         case 3:
             system("cls");
-            gestionConsola(f);
+            gestionConsola(ptrArchivo);
             break;
 }
 
 }
 
-void gestionarLibro (int libroiesimo, FILE *f){
+void seleccionarLibro (FILE*ptrArchivo){
+        int N = -1;
+        printf("\n[1] - Buscar libro por ISBN\n");
+        printf("[2] - Volver\n");
+        scanf("%d", &N);
+        int libroiesimo;
+        switch (N){
+        case 1:
+            system("cls");
+            libroiesimo = buscarLibroPorISBN (ptrArchivo);
+            mostrarLibroIesimo(libroiesimo,ptrArchivo);
+            gestionarLibro(libroiesimo,ptrArchivo);
+            break;
+        case 2:
+            gestionConsola(ptrArchivo);
+            break;
+        }
+}
+
+void gestionarLibro (int libroiesimo, FILE *ptrArchivo){
         int N = -1;
         printf("\n[1] - Editar libro\n");
         printf("[2] - Eliminar libro\n");
@@ -79,14 +100,18 @@ void gestionarLibro (int libroiesimo, FILE *f){
         scanf("%d", &N);
         switch (N){
         case 1:
+            editarLibro(libroiesimo,ptrArchivo);
+            system("cls");
+            gestionConsola(ptrArchivo);
             break;
         case 2:
-            eliminarLibro(libroiesimo,f);
-            gestionConsola(f);
+            eliminarLibro(libroiesimo,ptrArchivo);
+            system("cls");
+            gestionConsola(ptrArchivo);
             break;
         case 3:
             system("cls");
-            gestionConsola(f);
+            gestionConsola(ptrArchivo);
             break;
 }
 }
