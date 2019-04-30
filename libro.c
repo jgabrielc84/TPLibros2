@@ -1,5 +1,12 @@
 #include "libro.h"
 
+void abrirLibro (FILE * nombrePtr, const char * nombreArchivo, const char * tipoApertura){
+        if ((nombrePtr =fopen(nombreArchivo, tipoApertura))==NULL){
+        exit(EXIT_FAILURE);
+    }
+
+}
+
 int contarCadena (const char * cadena){
         int cont = 0;
         while (*cadena!='\0'){
@@ -38,14 +45,15 @@ void buscarLibroPorTituloOAutor (FILE*ptrArchivo){
     printf("Ingrese el titulo o autor que desea buscar \n");
     scanf("%s",ingreso);
     fseek(ptrArchivo, 0, SEEK_SET);
+    fread(&libro,sizeof(ST_LIBRO), 1, ptrArchivo);
     while (!feof(ptrArchivo)){
-        fread(&libro,sizeof(ST_LIBRO), 1, ptrArchivo);
         bool coincidenciaTitulo = buscarCoincidencia(ingreso,libro.titulo);
         bool coincidenciaNombre = buscarCoincidencia(ingreso,libro.autor.nombre);
         bool coincidenciaApellido = buscarCoincidencia(ingreso,libro.autor.apellido);
         if ((coincidenciaTitulo == 1)||(coincidenciaNombre == 1) || (coincidenciaApellido ==1)){
             mostrarLibro(libro);
         }
+        fread(&libro,sizeof(ST_LIBRO), 1, ptrArchivo);
     }
 }
 
@@ -111,9 +119,12 @@ void crearLibroPorConsola(FILE *ptrArchivo){
 void listarLibros(FILE*ptrArchivo){
     ST_LIBRO libro;
     fseek(ptrArchivo,0,SEEK_SET);
+    fread(&libro, sizeof(ST_LIBRO), 1,ptrArchivo);
     while (!feof(ptrArchivo)){
+        if (strcmp(libro.ISBN,"")!=0){
+                mostrarLibro(libro);
+            }
         fread(&libro, sizeof(ST_LIBRO), 1,ptrArchivo);
-        mostrarLibro(libro);
     }
 }
 
@@ -160,14 +171,20 @@ void eliminarLibro (int i, FILE*ptrArchivo){
         libro.precio = 0;
         libro.stockDisponible = 0;
         libro.stockReservado = 0;
-        fseek(ptrArchivo,i*sizeof(ST_LIBRO),SEEK_SET);
-        fwrite(&libro,sizeof(ST_LIBRO),1,ptrArchivo);
+        printf("¿Esta seguro que desea eliminar el libro? Y/N \n");
+        char confirmacion = 'N';
+        while (getchar()!='\n');
+        scanf ("%c", &confirmacion);
+        if ((confirmacion == 'Y')||(confirmacion == 'y')){
+            fseek(ptrArchivo,i*sizeof(ST_LIBRO),SEEK_SET);
+            fwrite(&libro,sizeof(ST_LIBRO),1,ptrArchivo);
+        }
 }
 
 
 void editarLibro (int libroiesimo, FILE*ptrArchivo){
         fseek(ptrArchivo,libroiesimo*(sizeof(ST_LIBRO)),SEEK_SET);
-        printf ("Ingrese 0 en caso de no querer cambiar ISBN, titulo, autor o precio \n");
+        printf ("Ingrese 0 en caso de no querer cambiar ISBN, titulo o autor \n");
         ST_LIBRO libroNuevo = crearLibro();
         ST_LIBRO libroViejo;
         fread(&libroViejo,sizeof(ST_LIBRO),1,ptrArchivo);
@@ -188,7 +205,7 @@ void editarLibro (int libroiesimo, FILE*ptrArchivo){
         }
         printf("Libro nuevo:\n");
         mostrarLibro(libroNuevo);
-        printf("Libro actual:\n");
+        printf("\nLibro actual:\n");
         mostrarLibro(libroViejo);
         printf("¿Esta seguro que desea realizar los cambios? Y/N \n");
         char confirmacion = 'N';
