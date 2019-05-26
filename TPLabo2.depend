@@ -52,3 +52,77 @@
 	"consola.h"
 	"libro.h"
 
+1558840832 source:e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\cadena.c
+	"cadena.h"
+
+1558840832 e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\cadena.h
+
+1558840832 source:e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\consola.c
+	"consola.h"
+	"libro.h"
+
+1558840832 e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\consola.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1558840832 e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\libro.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+
+1558844684 source:e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\libro.c
+	"libro.h"
+
+1558840832 source:e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"consola.h"
+	"libro.h"
+
+1558847540 source:e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\sources\cadena.c
+	"../headers/cadena.h"
+
+1558847514 e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\headers\cadena.h
+	<stdio.h>
+	<stdlib.h>
+	"consola.h"
+
+1558849171 e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\headers\consola.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	"cadena.h"
+
+1558849224 source:e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\sources\consola.c
+	"../headers/consola.h"
+	"../headers/libro.h"
+
+1558840832 e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\headers\libro.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+
+1558845326 source:e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\sources\libro.c
+	"../headers/libro.h"
+
+1558845296 source:e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\sources\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../headers/consola.h"
+	"../headers/libro.h"
+
+1558836541 source:e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\sources\venta.c
+	"../headers/venta.h"
+	"../headers/consola.h"
+
+1558838363 e:\documents\gaby\tecnicatura\2do cuatrimestre\laboratorio ii\tplibros2\headers\venta.h
+	<stdio.h>
+	<stdlib.h>
+	"consola.h"
+
