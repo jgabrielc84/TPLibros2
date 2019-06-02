@@ -1,5 +1,6 @@
 #include "libro.h"
 #include "cadena.h"
+#include "lista.h"
 
 /*void abrirLibro(FILE* nombrePtr, const char* nombreArchivo, const char* tipoApertura){
     if ((nombrePtr = fopen(nombreArchivo, tipoApertura)) == NULL){
@@ -7,7 +8,7 @@
     }
 }*/
 
-void buscarLibroPorTituloOAutor(FILE* ptrArchivo){
+/*void buscarLibroPorTituloOAutor(FILE* ptrArchivo){
     ST_LIBRO libro;
     char ingreso[50];
     printf("Ingrese el titulo o autor que desea buscar \n");
@@ -23,6 +24,35 @@ void buscarLibroPorTituloOAutor(FILE* ptrArchivo){
         }
         fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
     }
+}*/
+
+int buscarLibroPorAutorOTituloPorConsola(FILE* ptrArchivo){
+    ST_LIBRO libro;
+    ST_NODO* lista = NULL;
+    char* input = (char*)malloc(sizeof(char) * 50);
+    printf("Escriba un Titulo o Autor: ");
+    while(getchar() != '\n');
+    gets(input);
+    fseek(ptrArchivo, 0, SEEK_SET);
+    fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
+    while(!feof(ptrArchivo)){
+        if(contieneSubCadena(input, libro.titulo) || contieneSubCadena(input, libro.autor.nombre) || contieneSubCadena(input, libro.autor.apellido)){
+            insertarNodo(&lista, libro);
+        }
+        fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
+    }
+    //printear lista
+    ST_NODO* aux = lista;
+    int n = -1;
+    while(aux){
+        ++n;
+        printf("[%d] %s, %s %s\n", n, aux->libro.titulo, aux->libro.autor.apellido, aux->libro.autor.nombre);
+        aux = aux->siguiente;
+    }
+    printf("\n\nSeleccione un libro: ");
+    scanf("%d", &n);
+    libro = extraerIesimoNodo(&lista, n);
+    return buscarLibroPorISBN(ptrArchivo, libro.ISBN);
 }
 
 int buscarLibroVacio(FILE* ptrArchivo){
@@ -50,7 +80,7 @@ int contarLibros(FILE*ptrArchivo){
     return cant;
 }
 
-ST_LIBRO crearLibro (){
+ST_LIBRO crearLibro(){
     ST_LIBRO libro;
     printf("Ingresar el ISBN del libro\n");
     scanf("%s", libro.ISBN);
@@ -69,7 +99,7 @@ ST_LIBRO crearLibro (){
     return libro;
 }
 
-void crearLibroPorConsola(FILE *ptrArchivo){
+void crearLibroPorConsola(FILE* ptrArchivo){
     int cont = buscarLibroVacio(ptrArchivo);
     ST_LIBRO libro;
     libro = crearLibro();
@@ -77,19 +107,42 @@ void crearLibroPorConsola(FILE *ptrArchivo){
     fwrite(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
 }
 
-void listarLibros(FILE*ptrArchivo){
+void listarLibros(FILE* ptrArchivo){
     ST_LIBRO libro;
     fseek(ptrArchivo, 0, SEEK_SET);
     fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
     while(!feof(ptrArchivo)){
-        if(strcmp(libro.ISBN,"") != 0){
+        if(strcmp(libro.ISBN, "") != 0){
             mostrarLibro(libro);
         }
         fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
     }
 }
 
-int buscarLibroPorISBN(FILE* ptrArchivo){
+int buscarLibroPorISBNPorConsola(FILE* ptrArchivo){
+    char ISBN[10];
+    printf("Escriba ISBN \n");
+    scanf("%s", ISBN);
+    return buscarLibroPorISBN(ptrArchivo, ISBN);
+}
+
+int buscarLibroPorISBN(FILE* ptrArchivo, char ISBN[]){
+    ST_LIBRO libro;
+    int cont = 0;
+    fseek(ptrArchivo, 0, SEEK_SET);
+    fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
+    while((!feof(ptrArchivo)) && (strcmp(ISBN,libro.ISBN)!= 0)){
+        fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
+        cont++;
+    }
+    if(cont > contarLibros(ptrArchivo)){
+        return -1;
+    }
+    return cont;
+}
+
+
+/*int buscarLibroPorISBN(FILE* ptrArchivo){
     ST_LIBRO libro;
     char ISBN[10];
     printf("Escriba ISBN \n");
@@ -105,15 +158,15 @@ int buscarLibroPorISBN(FILE* ptrArchivo){
         return -1;
     }
     return cont;
-}
+}*/
 
 void mostrarLibro(ST_LIBRO libro){
-    printf("ISBN: %s\n", libro.ISBN);
-    printf("Título: %s\n", libro.titulo);
-    printf("Autor: %s %s\n", libro.autor.nombre, libro.autor.apellido);
-    printf("Precio: %4.2f\n", libro.precio);
-    printf("Stock disponible: %i\n", libro.stockDisponible);
-    printf("Stock reservado: %i\n", libro.stockReservado);
+    printf("\nISBN: %s", libro.ISBN);
+    printf("\nTitulo: %s", libro.titulo);
+    printf("\nAutor: %s %s", libro.autor.nombre, libro.autor.apellido);
+    printf("\nPrecio: %4.2f", libro.precio);
+    printf("\nStock disponible: %i", libro.stockDisponible);
+    printf("\nStock reservado: %i\n", libro.stockReservado);
 }
 
 void mostrarLibroIesimo(int i, FILE* ptrArchivo){

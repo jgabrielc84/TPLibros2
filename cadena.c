@@ -32,3 +32,31 @@ bool buscarCoincidencia(const char* cadenaIngresada, const char* cadenaExistente
     }
     return coincidencia;
 }
+
+bool contieneSubCadena(const char* cadenaIngresada, const char* cadenaExistente){
+    if(!cadenaIngresada || !cadenaExistente || contarCadena(cadenaIngresada) > contarCadena(cadenaExistente)){
+        return false;
+    }
+    char* auxSrc = cadenaIngresada;
+    char* auxDest = cadenaExistente;
+    bool foundSub = false;
+    while(*auxSrc && *auxDest){
+        if(foundSub){
+            if(*auxSrc == *auxDest){
+                auxSrc++;
+                auxDest++;
+            }else{
+                foundSub = false;
+                auxSrc = cadenaIngresada;
+            }
+        }else{
+            if(*auxSrc == *auxDest){
+                foundSub = true;
+            }else{
+                auxDest++;
+            }
+        }
+    }
+    return foundSub;
+}
+

@@ -22,8 +22,8 @@ typedef struct{
 int contarLibros(FILE* ptrArchivo);
 void crearLibroPorConsola(FILE* ptrArchivo);
 void listarLibros(FILE* ptrArchivo);
-int buscarLibroPorISBN(FILE* ptrArchivo);
+int buscarLibroPorISBNPorConsola(FILE* ptrArchivo);
 //void abrirLibro (FILE* nombrePtr, const char* nombreArchivo, const char* tipoApertura);
-
+int buscarLibroPorAutorOTituloPorConsola(FILE* ptrArchivo);
 
 #endif // LIBRO_H_INCLUDED
