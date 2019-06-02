@@ -8,19 +8,14 @@
 
 int main()
 {
-    FILE *ptrArchivoa = NULL;
-    if ((ptrArchivoa=fopen("libros", "ab+"))==NULL){
-        exit(EXIT_FAILURE);
-    }
+    //Abrimos nuestro archivo.
     FILE *ptrArchivo = NULL;
     if ((ptrArchivo=fopen("libros", "rb+"))==NULL){
         exit(EXIT_FAILURE);
     }
-
-
+    //Iniciamos la consola.
     iniciarConsola(ptrArchivo);
-
+    //Cerramos el archivo.
     fclose(ptrArchivo);
-    fclose(ptrArchivoa);
     return 0;
 }
