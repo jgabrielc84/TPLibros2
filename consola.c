@@ -82,8 +82,8 @@ void gestionConsola(FILE* ptrArchivo){
     printf("\n[1] - Crear libro\n");
     printf("[2] - Buscar libro\n");
     printf("[3] - Listar libros\n");
-    printf("[4] - Editar libro\n");
-    printf("[5] - Eliminar libro\n");
+    //printf("[4] - Editar libro\n");
+    //printf("[5] - Eliminar libro\n");
     printf("[0] - Volver\n");
     scanf("%d", &N);
     int libroiesimo;
@@ -95,6 +95,7 @@ void gestionConsola(FILE* ptrArchivo){
     case 2://buscar libro
     case 4:
     case 5:
+        system("cls");
         buscarLibro(ptrArchivo);
         break;
     case 3://listar libro
@@ -126,7 +127,6 @@ void gestionConsola(FILE* ptrArchivo){
 
 void buscarLibro (FILE* ptrArchivo){
     int N = -1;
-    system("cls");
     printf("\n[1] - Buscar libro por ISBN\n");
     printf("[2] - Buscar libro por titulo o autor\n");
     printf("[3] - Volver\n");
@@ -136,43 +136,30 @@ void buscarLibro (FILE* ptrArchivo){
     case 1://isbn
         system("cls");
         libroiesimo = buscarLibroPorISBNPorConsola(ptrArchivo);
-        mostrarLibroIesimo(libroiesimo, ptrArchivo);
-        gestionarLibro(libroiesimo, ptrArchivo);
+        if(libroiesimo != -1){
+            mostrarLibroIesimo(libroiesimo, ptrArchivo);
+            gestionarLibro(libroiesimo, ptrArchivo);
+        }else{
+            printf("Libro no encontrado.");
+            system("cls");
+            buscarLibro(ptrArchivo);
+        }
         break;
     case 2://titulo o autor
         /*system("cls");
         buscarLibroPorTituloOAutor(ptrArchivo);
         seleccionarLibro(ptrArchivo);*/
         libroiesimo = buscarLibroPorAutorOTituloPorConsola(ptrArchivo);
-        mostrarLibroIesimo(libroiesimo, ptrArchivo);
-        gestionarLibro(libroiesimo, ptrArchivo);
+        if(libroiesimo != -1){
+            mostrarLibroIesimo(libroiesimo, ptrArchivo);
+            gestionarLibro(libroiesimo, ptrArchivo);
+        }else{
+            printf("Libro no encontrado.");
+            buscarLibro(ptrArchivo);
+        }
         break;
     case 3://volver
         system("cls");
-        gestionConsola(ptrArchivo);
-        break;
-    }
-}
-
-void seleccionarLibro(FILE* ptrArchivo){
-    int N = -1;
-    printf("\n[1] - Seleccionar libro por ISBN\n");
-    printf("[2] - Buscar otro libro por titulo o autor\n");
-    printf("[3] - Volver\n");
-    scanf("%d", &N);
-    int libroiesimo;
-    switch (N){
-    case 1:
-        libroiesimo = buscarLibroPorISBNPorConsola(ptrArchivo);
-        mostrarLibroIesimo(libroiesimo, ptrArchivo);
-        gestionarLibro(libroiesimo, ptrArchivo);
-        break;
-    case 2:
-        libroiesimo = buscarLibroPorAutorOTituloPorConsola(ptrArchivo);
-        mostrarLibroIesimo(libroiesimo, ptrArchivo);
-        gestionarLibro(libroiesimo, ptrArchivo);
-        break;
-    case 3:
         gestionConsola(ptrArchivo);
         break;
     }

@@ -43,6 +43,9 @@ int buscarLibroPorAutorOTituloPorConsola(FILE* ptrArchivo){
     }
     //printear lista
     ST_NODO* aux = lista;
+    if(!aux){
+        return -1;
+    }
     int n = -1;
     while(aux){
         ++n;
