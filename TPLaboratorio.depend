@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1559492878 source:d:\source\codepija\tplaboratorio\consola.c
+	"consola.h"
+	"libro.h"
+
+1559493135 d:\source\codepija\tplaboratorio\consola.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+
+1559492979 d:\source\codepija\tplaboratorio\libro.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+
+1559492875 source:d:\source\codepija\tplaboratorio\libro.c
+	"libro.h"
+
+1559493141 source:d:\source\codepija\tplaboratorio\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"consola.h"
+	"libro.h"
+

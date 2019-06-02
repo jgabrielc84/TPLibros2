@@ -1,5 +1,5 @@
-#include "../headers/consola.h"
-#include "../headers/libro.h"
+#include "consola.h"
+#include "libro.h"
 
 void ventaConsola(FILE *ptrArchivo){
     int opcion = -1;
@@ -51,7 +51,7 @@ void iniciarConsola (FILE*ptrArchivo){
         int opcion = -1;
         system("cls");
         printf("Bienvenidos al sistema de Ventas \"LIBROS\"\n\n");
-        //printf("Tamaño de ST_LIBRO = %i bytes\n", sizeof(ST_LIBRO)); //Despues borrar
+        //printf("TamaÃ±o de ST_LIBRO = %i bytes\n", sizeof(ST_LIBRO)); //Despues borrar
         printf("[1] - Gestion de libros\n");
         printf("[2] - Venta de libros\n");
         printf("[3] - Entrega de libros comprados\n");

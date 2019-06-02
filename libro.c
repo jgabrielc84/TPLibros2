@@ -1,4 +1,4 @@
-#include "../headers/libro.h"
+#include "libro.h"
 
 void abrirLibro (FILE * nombrePtr, const char * nombreArchivo, const char * tipoApertura){
         if ((nombrePtr =fopen(nombreArchivo, tipoApertura))==NULL){
@@ -147,7 +147,7 @@ int buscarLibroPorISBN (FILE*ptrArchivo){
 
 void mostrarLibro (ST_LIBRO libro){
     printf ("ISBN: %s\n", libro.ISBN);
-    printf ("Título: %s\n", libro.titulo);
+    printf ("Titulo: %s\n", libro.titulo);
     printf ("Autor: %s %s\n", libro.autor.nombre, libro.autor.apellido);
     printf ("Precio: %4.2f\n", libro.precio);
     printf ("Stock disponible: %i\n", libro.stockDisponible);
@@ -170,7 +170,7 @@ void eliminarLibro (int i, FILE*ptrArchivo){
         libro.precio = 0;
         libro.stockDisponible = 0;
         libro.stockReservado = 0;
-        printf("¿Esta seguro que desea eliminar el libro? Y/N \n");
+        printf("¢¯Esta seguro que desea eliminar el libro? Y/N \n");
         char confirmacion = 'N';
         while (getchar()!='\n');
         scanf ("%c", &confirmacion);
@@ -206,7 +206,7 @@ void editarLibro (int libroiesimo, FILE*ptrArchivo){
         mostrarLibro(libroNuevo);
         printf("\nLibro actual:\n");
         mostrarLibro(libroViejo);
-        printf("¿Esta seguro que desea realizar los cambios? Y/N \n");
+        printf("¢¯Esta seguro que desea realizar los cambios? Y/N \n");
         char confirmacion = 'N';
         while (getchar()!='\n');
         scanf ("%c", &confirmacion);
