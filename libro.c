@@ -2,6 +2,21 @@
 #include "cadena.h"
 #include "lista.h"
 
+int buscarLibroPorISBN(FILE* ptrArchivo, char ISBN[]){
+    ST_LIBRO libro;
+    int cont = 0;
+    fseek(ptrArchivo, 0, SEEK_SET);
+    fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
+    while((!feof(ptrArchivo)) && (strcmp(ISBN,libro.ISBN)!= 0)){
+        fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
+        cont++;
+    }
+    if(cont > contarLibros(ptrArchivo)){
+        return -1;
+    }
+    return cont;
+}
+
 int buscarLibroPorAutorOTituloPorConsola(FILE* ptrArchivo){
     ST_LIBRO libro;
     ST_NODO* lista = NULL;
@@ -86,6 +101,15 @@ void crearLibroPorConsola(FILE* ptrArchivo){
     fwrite(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
 }
 
+void mostrarLibro(ST_LIBRO libro){
+    printf("\nISBN: %s", libro.ISBN);
+    printf("\nTitulo: %s", libro.titulo);
+    printf("\nAutor: %s %s", libro.autor.nombre, libro.autor.apellido);
+    printf("\nPrecio: %4.2f", libro.precio);
+    printf("\nStock disponible: %i", libro.stockDisponible);
+    printf("\nStock reservado: %i\n", libro.stockReservado);
+}
+
 void listarLibros(FILE* ptrArchivo){
     ST_LIBRO libro;
     fseek(ptrArchivo, 0, SEEK_SET);
@@ -105,29 +129,6 @@ int buscarLibroPorISBNPorConsola(FILE* ptrArchivo){
     return buscarLibroPorISBN(ptrArchivo, ISBN);
 }
 
-int buscarLibroPorISBN(FILE* ptrArchivo, char ISBN[]){
-    ST_LIBRO libro;
-    int cont = 0;
-    fseek(ptrArchivo, 0, SEEK_SET);
-    fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
-    while((!feof(ptrArchivo)) && (strcmp(ISBN,libro.ISBN)!= 0)){
-        fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
-        cont++;
-    }
-    if(cont > contarLibros(ptrArchivo)){
-        return -1;
-    }
-    return cont;
-}
-
-void mostrarLibro(ST_LIBRO libro){
-    printf("\nISBN: %s", libro.ISBN);
-    printf("\nTitulo: %s", libro.titulo);
-    printf("\nAutor: %s %s", libro.autor.nombre, libro.autor.apellido);
-    printf("\nPrecio: %4.2f", libro.precio);
-    printf("\nStock disponible: %i", libro.stockDisponible);
-    printf("\nStock reservado: %i\n", libro.stockReservado);
-}
 
 ST_LIBRO buscarLibroIesimo(int i, FILE* ptrArchivo){
     ST_LIBRO libro;

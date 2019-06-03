@@ -1,5 +1,6 @@
 #include "venta.h"
-#include "libro.h"
+#include "consola.h"
+
 void menuVenta(FILE* ptrArchivo, ST_NODO* listaDeVenta){
     printf("\n[1] Buscar otro libro");
     printf("\n[2] Volver\n");
@@ -28,9 +29,9 @@ void ingresarArticulosAVenta(FILE* ptrArchivo, ST_NODO* listaDeVenta){
     }
     mostrarLibro(libro);
     printf("\nDesea ingresar este libro a la lista de venta? Y/N\n");
-    char confirmacion;
+    char confirmacion = 'n';
     while(getchar() != '\n');
-    scanf("%c", confirmacion);
+    scanf("%c", &confirmacion);
     if((confirmacion == 'Y') || (confirmacion == 'y')){
         insertarNodo(&listaDeVenta, libro);
     }
