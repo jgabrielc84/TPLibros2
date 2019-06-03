@@ -2,30 +2,6 @@
 #include "cadena.h"
 #include "lista.h"
 
-/*void abrirLibro(FILE* nombrePtr, const char* nombreArchivo, const char* tipoApertura){
-    if ((nombrePtr = fopen(nombreArchivo, tipoApertura)) == NULL){
-        exit(EXIT_FAILURE);
-    }
-}*/
-
-/*void buscarLibroPorTituloOAutor(FILE* ptrArchivo){
-    ST_LIBRO libro;
-    char ingreso[50];
-    printf("Ingrese el titulo o autor que desea buscar \n");
-    scanf("%s", ingreso);
-    fseek(ptrArchivo, 0, SEEK_SET);
-    fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
-    while (!feof(ptrArchivo)){
-        bool coincidenciaTitulo = buscarCoincidencia(ingreso, libro.titulo);
-        bool coincidenciaNombre = buscarCoincidencia(ingreso, libro.autor.nombre);
-        bool coincidenciaApellido = buscarCoincidencia(ingreso, libro.autor.apellido);
-        if (coincidenciaTitulo || coincidenciaNombre || coincidenciaApellido){
-            mostrarLibro(libro);
-        }
-        fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
-    }
-}*/
-
 int buscarLibroPorAutorOTituloPorConsola(FILE* ptrArchivo){
     ST_LIBRO libro;
     ST_NODO* lista = NULL;
@@ -144,25 +120,6 @@ int buscarLibroPorISBN(FILE* ptrArchivo, char ISBN[]){
     return cont;
 }
 
-
-/*int buscarLibroPorISBN(FILE* ptrArchivo){
-    ST_LIBRO libro;
-    char ISBN[10];
-    printf("Escriba ISBN \n");
-    scanf("%s", ISBN);
-    int cont = 0;
-    fseek(ptrArchivo, 0, SEEK_SET);
-    fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
-    while((!feof(ptrArchivo)) && (strcmp(ISBN,libro.ISBN)!= 0)){
-        fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
-        cont++;
-    }
-    if(cont > contarLibros(ptrArchivo)){
-        return -1;
-    }
-    return cont;
-}*/
-
 void mostrarLibro(ST_LIBRO libro){
     printf("\nISBN: %s", libro.ISBN);
     printf("\nTitulo: %s", libro.titulo);
@@ -172,10 +129,16 @@ void mostrarLibro(ST_LIBRO libro){
     printf("\nStock reservado: %i\n", libro.stockReservado);
 }
 
-void mostrarLibroIesimo(int i, FILE* ptrArchivo){
+ST_LIBRO buscarLibroIesimo(int i, FILE* ptrArchivo){
     ST_LIBRO libro;
     fseek(ptrArchivo, i * sizeof(ST_LIBRO), SEEK_SET);
     fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
+    return libro;
+}
+
+
+void mostrarLibroIesimo(int i, FILE* ptrArchivo){
+    ST_LIBRO libro = buscarLibroIesimo(i, ptrArchivo);
     mostrarLibro(libro);
 }
 

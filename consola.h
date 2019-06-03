@@ -10,6 +10,4 @@ void iniciarConsola (FILE* ptrArchivo);
 
 void gestionConsola (FILE* ptrArchivo);
 
-void ventaConsola(FILE* ptrArchivo);
-
 #endif // CONSOLA_H_INCLUDED

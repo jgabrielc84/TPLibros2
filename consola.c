@@ -1,45 +1,40 @@
 #include "consola.h"
 #include "libro.h"
+#include "lista.h"
 
-void ventaConsola(FILE* ptrArchivo){
+void ventaConsola(FILE* ptrArchivo, ST_NODO* listaDeVenta){
     int opcion = -1;
-    while(opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4 && opcion != 0){
-        printf("Venta de libros\n\n");
-        printf("[1] - Listar libros\n");
-        printf("[2] - Ingresar articulos a venta\n");
-        printf("[3] - Confirmar venta\n");
-        printf("[4] - Cancelar venta\n");
-        printf("[0] - Volver\n\n");
-        printf("Opcion: ");
-        scanf("%i", &opcion);
-        switch(opcion){
-        case 1:
-            system("cls");
-            listarLibros(ptrArchivo);
-            printf("\n");
-            printf("Presione una tecla para continuar.\n\n ");
-            getch();
-            ventaConsola(ptrArchivo);
-            break;
-        case 2:
-            //to-do
-            break;
-        case 3:
-            //to-do
-            break;
-        case 4:
-            //to-do
-            break;
-        case 0:
-            iniciarConsola(ptrArchivo);
-            break;
-        default:
-            printf("La opcion seleccionada no corresponde a una opcion del menu.\n");
-            printf("Presione una tecla para continuar.\n");
-            getch();
-            system("cls");
-            break;
-        }
+    printf("Venta de libros\n\n");
+    printf("[1] - Listar libros\n");
+    printf("[2] - Ingresar articulos a venta\n");
+    printf("[3] - Confirmar venta\n");
+    printf("[4] - Cancelar venta\n");
+    printf("[0] - Volver\n\n");
+    printf("Opcion: ");
+    scanf("%i", &opcion);
+    switch(opcion){
+    case 1://listar libros
+        system("cls");
+        listarLibros(ptrArchivo);
+        printf("\n");
+        ventaConsola(ptrArchivo, listaDeVenta);
+        break;
+    case 2://Ingresar articulos a venta
+        ingresarArticulosAVenta(ptrArchivo, listaDeVenta);
+        break;
+    case 3://Confirmar venta
+        break;
+    case 4://Cancelar venta
+        break;
+    case 0://volver
+        iniciarConsola(ptrArchivo);
+        break;
+    default:
+        printf("La opcion seleccionada no corresponde a una opcion del menu.\n");
+        printf("Presione una tecla para continuar.\n");
+        getch();
+        system("cls");
+        break;
     }
 }
 
@@ -61,7 +56,8 @@ void iniciarConsola(FILE* ptrArchivo){
             break;
         case 2:
             system("cls");
-            ventaConsola(ptrArchivo);
+            ST_NODO* listaDeVenta = NULL;
+            ventaConsola(ptrArchivo, listaDeVenta);
             break;
         case 3:
             system("cls");

@@ -19,6 +19,7 @@ typedef struct{
     int stockReservado;
 }ST_LIBRO;
 
+ST_LIBRO buscarLibroIesimo(int i, FILE* ptrArchivo);
 int contarLibros(FILE* ptrArchivo);
 void crearLibroPorConsola(FILE* ptrArchivo);
 void listarLibros(FILE* ptrArchivo);

@@ -15,7 +15,6 @@ bool buscarCoincidencia(const char* cadenaIngresada, const char* cadenaExistente
     int tamanioCadenaIngresada = contarCadena(cadenaIngresada);
     const char *posicionInicial = cadenaIngresada;
     while((*cadenaExistente != '\0') && (*cadenaIngresada != '\0')){
-            //simplificar este if por dios!
         if((*cadenaIngresada == *cadenaExistente) || ((*cadenaIngresada <= 90) && (*cadenaIngresada >= 65) && (*cadenaIngresada == *cadenaExistente - 32)) || ((*cadenaIngresada <= 122) && (*cadenaIngresada >= 97) && (*cadenaIngresada == *cadenaExistente + 32))){
             cadenaExistente++;
             cadenaIngresada++;
