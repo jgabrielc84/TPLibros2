@@ -7,7 +7,7 @@ int buscarLibroPorISBN(FILE* ptrArchivo, char ISBN[]){
     int cont = 0;
     fseek(ptrArchivo, 0, SEEK_SET);
     fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
-    while((!feof(ptrArchivo)) && (strcmp(ISBN,libro.ISBN)!= 0)){
+    while((!feof(ptrArchivo)) && (strcmp(ISBN,libro.ISBN) != 0)){
         fread(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
         cont++;
     }

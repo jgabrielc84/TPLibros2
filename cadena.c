@@ -56,6 +56,9 @@ bool contieneSubCadena(const char* cadenaIngresada, const char* cadenaExistente)
             }
         }
     }
+    if(*auxSrc){
+        return false;
+    }
     return foundSub;
 }
 

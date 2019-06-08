@@ -25,18 +25,20 @@
 	"consola.h"
 	"libro.h"
 
-1559584261 source:c:\users\main\documents\github\tplibros2\consola.c
-	"consola.h"
+1559593163 source:c:\users\main\documents\github\tplibros2\consola.c
 	"libro.h"
+	"consola.h"
 	"lista.h"
+	"venta.h"
 
-1559582023 c:\users\main\documents\github\tplibros2\consola.h
+1559593334 c:\users\main\documents\github\tplibros2\consola.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<conio.h>
+	"lista.h"
 
-1559582811 c:\users\main\documents\github\tplibros2\libro.h
+1559593152 c:\users\main\documents\github\tplibros2\libro.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -66,11 +68,12 @@
 1559501439 c:\users\main\documents\github\tplibros2\lista.h
 	"libro.h"
 
-1559587925 source:c:\users\main\documents\github\tplibros2\venta.c
+1559593547 source:c:\users\main\documents\github\tplibros2\venta.c
 	"venta.h"
-	"libro.h"
+	"consola.h"
 
-1559583592 c:\users\main\documents\github\tplibros2\venta.h
+1559593553 c:\users\main\documents\github\tplibros2\venta.h
 	<stdlib.h>
 	"lista.h"
+	"libro.h"
 
