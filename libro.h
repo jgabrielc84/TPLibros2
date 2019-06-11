@@ -19,9 +19,17 @@ typedef struct{
     int stockReservado;
 }ST_LIBRO;
 
+char * enteroACadena (int valor, char * cadena);
 int contarLibros (FILE*ptrArchivo);
+int contarCadena (const char * cadena);
+bool buscarCoincidencia (const char *cadenaIngresada, const char*cadenaExistente);
+void mostrarLibroIesimo (int i, FILE *ptrArchivo);
+void eliminarLibro (int i, FILE*ptrArchivo);
+void editarLibro (int libroiesimo, FILE*ptrArchivo);
+void buscarLibroPorTituloOAutor (FILE*ptrArchivo);
 void crearLibroPorConsola(FILE *ptrArchivo);
 void listarLibros(FILE*ptrArchivo);
+int seleccionarLibroPorISBN(char * ISBN, ST_LIBRO * libro, FILE * ptrArchivo);
 int buscarLibroPorISBN (FILE*ptrArchivo);
 void abrirLibro (FILE * nombrePtr, const char * nombreArchivo, const char * tipoApertura);
 
