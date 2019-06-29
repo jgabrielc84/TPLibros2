@@ -3,24 +3,30 @@
 #include <string.h>
 #include "consola.h"
 #include "libro.h"
+#include "listas.h"
 
-
+// Arreglar eliminar nodos de listas y colas
 
 int main()
 {
-    FILE *fa = NULL;
-    if ((fa=fopen("libros", "ab+"))==NULL){
+    FILE *ptrArchivoa = NULL;
+    if ((ptrArchivoa=fopen("libros", "ab+"))==NULL){
         exit(EXIT_FAILURE);
     }
-    FILE *f = NULL;
-    if ((f=fopen("libros", "rb+"))==NULL){
+    FILE *ptrArchivo = NULL;
+    if ((ptrArchivo=fopen("libros", "rb+"))==NULL){
         exit(EXIT_FAILURE);
     }
 
 
-    iniciarConsola(f);
+    ST_LISTAVENTAS * listaRetirosEnSucursal;
+    crearListaVentas(&listaRetirosEnSucursal);
+    ST_COLALIBROS colaEnviosADomicilio;
+    crearCola(&colaEnviosADomicilio);
 
-    fclose(f);
-    fclose(fa);
+    iniciarConsola(ptrArchivo, &listaRetirosEnSucursal , &colaEnviosADomicilio);
+
+    fclose(ptrArchivo);
+    fclose(ptrArchivoa);
     return 0;
 }
