@@ -1,188 +1,222 @@
 #include "libro.h"
 #include "consola.h"
-#include "lista.h"
 #include "venta.h"
 
-void ventaConsola(FILE* ptrArchivo, ST_NODO* listaDeVenta){
-    int opcion = -1;
-    printf("Venta de libros\n\n");
-    printf("[1] - Listar libros\n");
-    printf("[2] - Ingresar articulos a venta\n");
-    printf("[3] - Confirmar venta\n");
-    printf("[4] - Cancelar venta\n");
-    printf("[0] - Volver\n\n");
-    printf("Opcion: ");
-    scanf("%i", &opcion);
-    switch(opcion){
-    case 1://listar libros
-        system("cls");
-        listarLibros(ptrArchivo);
-        printf("\n");
-        ventaConsola(ptrArchivo, listaDeVenta);
-        break;
-    case 2://Ingresar articulos a venta
-        ingresarArticulosAVenta(ptrArchivo, listaDeVenta);
-        break;
-    case 3://Confirmar venta
-        break;
-    case 4://Cancelar venta
-        break;
-    case 0://volver
-        iniciarConsola(ptrArchivo);
-        break;
-    default:
-        printf("La opcion seleccionada no corresponde a una opcion del menu.\n");
-        printf("Presione una tecla para continuar.\n");
-        getch();
-        system("cls");
-        break;
-    }
-}
-
-void iniciarConsola(FILE* ptrArchivo){
-    int opcion = -1;
-    system("cls");
-    printf("Bienvenidos al sistema de Ventas \"LIBROS\"\n\n");
-    //printf("Tamaño de ST_LIBRO = %i bytes\n", sizeof(ST_LIBRO)); //Despues borrar
-    printf("[1] - Gestion de libros\n");
-    printf("[2] - Venta de libros\n");
-    printf("[3] - Entrega de libros comprados\n");
-    printf("[0] - Salir\n\n");
-    printf("Opcion: ");
-    scanf("%i", &opcion);
-    switch (opcion){
+void gestionarLibroConsola(ST_LIBRO libro, FILE* ptrArchivo) {
+	int opcion = -1;
+	while(opcion != 0){
+        printf("\n[1] - Editar libro\n");
+        printf("[2] - Eliminar libro\n");
+        printf("[3] - Buscar otro libro\n");
+        printf("[0] - Volver\n");
+        scanf("%d", &opcion);
+        switch(opcion) {
         case 1:
+            editarLibro(libro, ptrArchivo);
             system("cls");
-            gestionConsola(ptrArchivo);
-            break;
+            return;
         case 2:
+            eliminarLibro(libro, ptrArchivo);
             system("cls");
-            ST_NODO* listaDeVenta = NULL;
-            ventaConsola(ptrArchivo, listaDeVenta);
-            break;
+            return;
         case 3:
-            system("cls");
-            //entregaLibrosConsola(ptrArchivo);
-            break;
         case 0:
-            system("cls");
-            printf("Que tenga un buen dia!\n\n");
-            printf("Presione una tecla para continuar.\n");
-            getch();
-            exit(EXIT_SUCCESS);
+            return;
+        }
+	}
+}
+
+void buscarLibroConsola (FILE* ptrArchivo){
+    int opcion = -1;
+    ST_LIBRO libro;
+    while(opcion != 0){
+        libro = inicializarLibro();
+        printf("\nInicio -> Gestion -> Buscar Libro\n");
+        printf("\n[1] - Buscar libro por ISBN\n");
+        printf("[2] - Buscar libro por titulo o autor\n");
+        printf("[0] - Volver\n");
+        scanf("%d", &opcion);
+        switch(opcion){
+        case 1://ISBN
+            libro = buscarLibroPorISBNPorConsola(ptrArchivo);
+            if(strcmp(libro.ISBN, "") != 0){
+                mostrarLibro(libro);
+                gestionarLibroConsola(libro, ptrArchivo);
+            }
             break;
-    }
-}
-
-void gestionarLibro(int libroiesimo, FILE* ptrArchivo){
-    int N = -1;
-    printf("\n[1] - Editar libro\n");
-    printf("[2] - Eliminar libro\n");
-    printf("[3] - Volver\n");
-    scanf("%d", &N);
-    switch (N){
-    case 1:
-        editarLibro(libroiesimo, ptrArchivo);
-        system("cls");
-        gestionConsola(ptrArchivo);
-        break;
-    case 2:
-        eliminarLibro(libroiesimo, ptrArchivo);
-        system("cls");
-        gestionConsola(ptrArchivo);
-        break;
-    case 3:
-        system("cls");
-        gestionConsola(ptrArchivo);
-        break;
-    }
-}
-
-void buscarLibro (FILE* ptrArchivo){
-    int N = -1;
-    printf("\n[1] - Buscar libro por ISBN\n");
-    printf("[2] - Buscar libro por titulo o autor\n");
-    printf("[3] - Volver\n");
-    scanf("%d", &N);
-    int libroiesimo;
-    switch (N){
-    case 1://isbn
-        system("cls");
-        libroiesimo = buscarLibroPorISBNPorConsola(ptrArchivo);
-        if(libroiesimo != -1){
-            mostrarLibroIesimo(libroiesimo, ptrArchivo);
-            gestionarLibro(libroiesimo, ptrArchivo);
-        }else{
-            printf("Libro no encontrado.");
-            system("cls");
-            buscarLibro(ptrArchivo);
+        case 2://titulo o autor
+            libro = buscarLibroPorAutorOTituloPorConsola(ptrArchivo);
+            if(strcmp(libro.ISBN, "") != 0){
+                mostrarLibro(libro);
+                gestionarLibroConsola(libro, ptrArchivo);
+            }
+            break;
         }
-        break;
-    case 2://titulo o autor
-        /*system("cls");
-        buscarLibroPorTituloOAutor(ptrArchivo);
-        seleccionarLibro(ptrArchivo);*/
-        libroiesimo = buscarLibroPorAutorOTituloPorConsola(ptrArchivo);
-        if(libroiesimo != -1){
-            mostrarLibroIesimo(libroiesimo, ptrArchivo);
-            gestionarLibro(libroiesimo, ptrArchivo);
-        }else{
-            printf("Libro no encontrado.");
-            buscarLibro(ptrArchivo);
-        }
-        break;
-    case 3://volver
-        system("cls");
-        gestionConsola(ptrArchivo);
-        break;
     }
 }
 
 void gestionConsola(FILE* ptrArchivo){
-    int N = -1;
-    printf("\n[1] - Crear libro\n");
-    printf("[2] - Buscar libro\n");
-    printf("[3] - Listar libros\n");
-    //printf("[4] - Editar libro\n");
-    //printf("[5] - Eliminar libro\n");
-    printf("[0] - Volver\n");
-    scanf("%d", &N);
-    //int libroiesimo;
-    switch (N){
-    case 1://crear libro
-        crearLibroPorConsola(ptrArchivo);
-        gestionConsola(ptrArchivo);
-        break;
-    case 2://buscar libro
-    case 4:
-    case 5:
-        system("cls");
-        buscarLibro(ptrArchivo);
-        break;
-    case 3://listar libro
-        system("cls");
-        listarLibros(ptrArchivo);
-        gestionConsola(ptrArchivo);
-        break;
-    /*case 4://editar libro
-        system("cls");
-        libroiesimo = buscarLibroPorISBN(ptrArchivo);
-        mostrarLibroIesimo(libroiesimo, ptrArchivo);
-        editarLibro(libroiesimo, ptrArchivo);
-        system("cls");
-        gestionConsola(ptrArchivo);
-        break;
-    case 5://eliminar libro
-        system("cls");
-        libroiesimo = buscarLibroPorISBN(ptrArchivo);
-        mostrarLibroIesimo(libroiesimo, ptrArchivo);
-        eliminarLibro(libroiesimo, ptrArchivo);
-        system("cls");
-        gestionConsola(ptrArchivo);
-        break;*/
-    case 0://volver
-        iniciarConsola(ptrArchivo);
-        break;
+    int opcion = -1;
+    while(opcion != 0){
+        printf("\nInicio -> Gestion\n");
+        printf("\n[1] - Crear libro\n");
+        printf("[2] - Buscar libro\n");
+        printf("[3] - Listar libros\n");
+        printf("[0] - Volver\n");
+        scanf("%d", &opcion);
+        switch (opcion){
+        case 1://crear libro
+            crearLibro(ptrArchivo);
+            system("cls");
+            break;
+        case 2://buscar libro
+            system("cls");
+            buscarLibroConsola(ptrArchivo);
+            system("cls");
+            break;
+        case 3://listar libro
+            system("cls");
+            listarLibros(ptrArchivo);
+            break;
+        }
+    }
+}
+void ventaConsola(FILE* ptrArchivo, ST_LISTA_LIBROS** listaVentas, ST_LISTA_VENTAS** listaRetirosPorSucursal, ST_COLA_LIBROS* colaEnviosADomicilio){
+    int opcion = -1;
+    int factura = -1;
+    while(opcion != 0){
+        printf("Inicio -> Ventas\n\n");
+        printf("[1] - Listar Libros ingresados a venta\n");
+        printf("[2] - Ingresar articulos a venta\n");
+        printf("[3] - Finalizar seleccion de libros\n");
+        if(*listaVentas == NULL){
+            printf("[0] - Volver\n");
+        }else{
+            printf("[0] - Cancelar venta\n");
+        }
+        scanf("%d", &opcion);
+        switch (opcion){
+        case 1://Listar libros
+            system("cls");
+            printearListaLibros(listaVentas);
+            printf("\n");
+            break;
+        case 2://Ingresar articulos a venta
+            system ("cls");
+            ingresarArticulosAVenta(ptrArchivo, listaVentas);
+            break;
+        case 3://Finalizar seleccion de libros
+            system ("cls");
+            printearListaLibros(listaVentas);
+            factura = generarFactura(listaVentas);
+            elegirModoDeEntrega(ptrArchivo, factura, listaVentas, listaRetirosPorSucursal, colaEnviosADomicilio);
+            break;
+        }
     }
 }
 
+
+void enviosADomicilio(FILE* ptrArchivo, ST_LISTA_VENTAS** listaRetirosPorSucursal, ST_COLA_LIBROS* colaEnviosADomicilio) {
+	int opcion = -1;
+	while(opcion != 0){
+        printf("\n[1] - Despachar envios\n");
+        printf("[0] - Volver\n");
+        scanf("%d", &opcion);
+        switch (opcion) {
+        case 1:
+            system("cls");
+            remover5ElementosDeCola(colaEnviosADomicilio, ptrArchivo);
+            system("cls");
+            mostrar5ElementosDeCola(colaEnviosADomicilio);
+            break;
+        }
+	}
+}
+
+void retirosPorSucursal(FILE* ptrArchivo, ST_LISTA_VENTAS** listaRetirosPorSucursal, ST_COLA_LIBROS* colaEnviosADomicilio) {
+	int opcion = -1;
+	while(opcion != 0){
+        printf("\n[1] - Retirar libros del local\n");
+        printf("[0] - Volver\n");
+        scanf("%d", &opcion);
+        switch (opcion) {
+        case 1:
+            system("cls");
+            eliminarVentaDeLista(ptrArchivo, listaRetirosPorSucursal);
+            system("cls");
+            mostrarListaVentas(listaRetirosPorSucursal);
+            break;
+        }
+	}
+}
+
+void gestionEntregaDeLibros(FILE* ptrArchivo, ST_LISTA_VENTAS** listaRetirosPorSucursal, ST_COLA_LIBROS* colaEnviosADomicilio) {
+	int opcion = -1;
+	while(opcion != 0){
+        printf("\nInicio -> Despachar Libros\n");
+        printf("\n[1] - Mostrar cinco primeros envios a domicilio\n");
+        printf("[2] - Mostrar lista de retiro en el local\n");
+        printf("[0] - Volver\n");
+        scanf("%d", &opcion);
+        switch (opcion) {
+        case 1:
+            system("cls");
+            //si la cola esta vacia, no mostrar nada.
+            if(colaEnviosADomicilio->inicio == NULL){
+                printf("\nNo hay libros a despachar.\n");
+                break;
+            }
+            mostrar5ElementosDeCola(colaEnviosADomicilio);
+            enviosADomicilio(ptrArchivo, listaRetirosPorSucursal, colaEnviosADomicilio);
+            break;
+        case 2:
+            system("cls");
+            //si la lista esta vacia, no mostrar nada tampoco
+            if(*listaRetirosPorSucursal == NULL){
+                printf("\nNo hay libros a retirar.\n");
+                break;
+            }
+            mostrarListaVentas(listaRetirosPorSucursal);
+            retirosPorSucursal(ptrArchivo, listaRetirosPorSucursal, colaEnviosADomicilio);
+            break;
+        }
+	}
+}
+
+
+
+void iniciarConsola (FILE* ptrArchivo, ST_LISTA_VENTAS** listaRetirosEnSucursal, ST_COLA_LIBROS* colaEnviosADomicilio){
+    int opcion = -1;
+    while(opcion != 0){
+        system("cls");
+        printf("Bienvenidos al sistema de Ventas \"LIBROS\"\n\n");
+        printf("[1] - Gestion de libros\n");
+        printf("[2] - Venta de libros\n");
+        printf("[3] - Entrega de libros comprados\n");
+        printf("[0] - Salir\n\n");
+        printf("Opcion: ");
+        scanf("%i", &opcion);
+        switch (opcion){
+            case 1:
+                system("cls");
+                gestionConsola(ptrArchivo);
+                break;
+            case 2:
+                system("cls");
+                ST_LISTA_LIBROS* listaVentas = NULL;
+                ventaConsola(ptrArchivo, &listaVentas, listaRetirosEnSucursal, colaEnviosADomicilio);
+                break;
+            case 3:
+                system("cls");
+                gestionEntregaDeLibros(ptrArchivo, listaRetirosEnSucursal, colaEnviosADomicilio);
+                break;
+            case 0:
+                system("cls");
+                printf("Que tenga un buen dia!\n\n");
+                printf("Presione una tecla para continuar.\n");
+                getch();
+                exit(EXIT_SUCCESS);
+                break;
+        }
+    }
+}
