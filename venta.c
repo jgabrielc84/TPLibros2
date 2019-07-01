@@ -9,6 +9,14 @@ void actualizarStockReservadoLista(FILE* ptrArchivo, ST_LISTA_LIBROS** listaVent
 	}
 }
 
+void actualizarStockDisponibleLista(FILE* ptrArchivo, ST_LISTA_LIBROS** listaVentas, int cant) {
+	ST_LISTA_LIBROS* aux = *listaVentas;
+	while(aux) {
+		actualizarStockDisponiblePorISBN(ptrArchivo, aux->libro.ISBN, cant);
+		aux = aux->ste;
+	}
+}
+
 void elegirModoDeEntrega(FILE* ptrArchivo, int factura, ST_LISTA_LIBROS** listaVentas, ST_LISTA_VENTAS** listaRetirosPorSucursal, ST_COLA_LIBROS* colaEnviosADomicilio) {
 	int opcion = -1;
 	while(opcion != 1 && opcion != 2){
@@ -21,24 +29,17 @@ void elegirModoDeEntrega(FILE* ptrArchivo, int factura, ST_LISTA_LIBROS** listaV
             system("cls");
             agregarVentaACola(factura, listaVentas, colaEnviosADomicilio);
             actualizarStockReservadoLista(ptrArchivo, listaVentas, 1);
-            vaciarListaLibros(listaVentas);
+            //desreferenciamos nuestra cabecera de ventas ya que los libros ahora estan guardados en la cola.
+            *listaVentas = NULL;
             break;
         case 2:
             system("cls");
             agregarVentaALista(factura, listaVentas, listaRetirosPorSucursal);
             actualizarStockReservadoLista(ptrArchivo, listaVentas, 1);
-            vaciarListaLibros(listaVentas);
+            //desreferenciamos nuestra cabecera de ventas ya que los libros ahora estan guardados en la lista.
+            *listaVentas = NULL;
             break;
         }
-	}
-}
-
-
-void actualizarStockDisponibleLista(FILE* ptrArchivo, ST_LISTA_LIBROS** listaVentas, int cant) {
-	ST_LISTA_LIBROS* aux = *listaVentas;
-	while(aux) {
-		actualizarStockDisponiblePorISBN(ptrArchivo, aux->libro.ISBN, cant);
-		aux = aux->ste;
 	}
 }
 

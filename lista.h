@@ -30,5 +30,4 @@ void mostrar5ElementosDeCola (ST_COLA_LIBROS * colaVentas);
 void remover5ElementosDeCola (ST_COLA_LIBROS * colaVentas, FILE * ptrArchivo);
 void agregarVentaACola (int factura, ST_LISTA_LIBROS ** listaVenta, ST_COLA_LIBROS * colaVentas);
 void agregarVentaALista (int factura, ST_LISTA_LIBROS ** listaVenta, ST_LISTA_VENTAS ** listaRetirosPorSucursal);
-void vaciarListaLibros(ST_LISTA_LIBROS** lista);
 #endif // LISTA_H_INCLUDED

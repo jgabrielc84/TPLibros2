@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1561915668 source:d:\users\ghihjik\source\repos\tplaboratorio\consola.c
+1561916028 source:d:\users\ghihjik\source\repos\tplaboratorio\consola.c
 	"libro.h"
 	"consola.h"
 	"venta.h"
@@ -12,19 +12,19 @@
 	"libro.h"
 	"lista.h"
 
-1561907379 source:d:\users\ghihjik\source\repos\tplaboratorio\libro.c
+1561992816 source:d:\users\ghihjik\source\repos\tplaboratorio\libro.c
 	"libro.h"
 	"consola.h"
 	"lista.h"
 	"cadena.h"
 
-1561904860 d:\users\ghihjik\source\repos\tplaboratorio\libro.h
+1561991421 d:\users\ghihjik\source\repos\tplaboratorio\libro.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<stdbool.h>
 
-1561850327 source:d:\users\ghihjik\source\repos\tplaboratorio\main.c
+1561992828 source:d:\users\ghihjik\source\repos\tplaboratorio\main.c
 	<stdio.h>
 	<stdlib.h>
 	"consola.h"
@@ -36,18 +36,58 @@
 1561846034 d:\users\ghihjik\source\repos\tplaboratorio\cadena.h
 	"stdbool.h"
 
-1561905704 d:\users\ghihjik\source\repos\tplaboratorio\lista.h
+1561991227 d:\users\ghihjik\source\repos\tplaboratorio\lista.h
 	"libro.h"
 
-1561915913 source:d:\users\ghihjik\source\repos\tplaboratorio\lista.c
+1561991227 source:d:\users\ghihjik\source\repos\tplaboratorio\lista.c
 	"libro.h"
 	"lista.h"
 
-1561915956 source:d:\users\ghihjik\source\repos\tplaboratorio\venta.c
+1561991149 source:d:\users\ghihjik\source\repos\tplaboratorio\venta.c
 	"venta.h"
 	<time.h>
 
 1561904564 d:\users\ghihjik\source\repos\tplaboratorio\venta.h
 	<stdio.h>
 	"lista.h"
+
+1561846040 source:d:\users\ghihjik\documents\github\tplibros2\cadena.c
+	"cadena.h"
+
+1561846034 d:\users\ghihjik\documents\github\tplibros2\cadena.h
+	"stdbool.h"
+
+1561916028 source:d:\users\ghihjik\documents\github\tplibros2\consola.c
+	"libro.h"
+	"consola.h"
+	"venta.h"
+
+1561993553 d:\users\ghihjik\documents\github\tplibros2\libro.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+
+1561855932 d:\users\ghihjik\documents\github\tplibros2\consola.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	"libro.h"
+	"lista.h"
+
+1561991227 d:\users\ghihjik\documents\github\tplibros2\lista.h
+	"libro.h"
+
+1561904564 d:\users\ghihjik\documents\github\tplibros2\venta.h
+	<stdio.h>
+	"lista.h"
+
+1561991227 source:d:\users\ghihjik\documents\github\tplibros2\lista.c
+	"libro.h"
+	"lista.h"
+
+1561991149 source:d:\users\ghihjik\documents\github\tplibros2\venta.c
+	"venta.h"
+	<time.h>
 

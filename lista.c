@@ -1,15 +1,6 @@
 #include "libro.h"
 #include "lista.h"
 
-void vaciarListaLibros(ST_LISTA_LIBROS** lista){
-    ST_LISTA_LIBROS* aux;
-    while(*lista){
-        aux = *lista;
-        *lista = (*lista)->ste;
-        free(aux);
-    }
-}
-
 ST_LISTA_LIBROS* crearNodoLista() {
 	ST_LISTA_LIBROS* nodo = (ST_LISTA_LIBROS*)malloc(sizeof(ST_LISTA_LIBROS));
 	nodo->libro = inicializarLibro();
@@ -47,26 +38,22 @@ ST_LISTA_VENTAS* crearNodoVentas (int factura, ST_LISTA_LIBROS ** listaLibros){
     nodoVentas ->IDFactura = factura;
     int cantLibros = 0;
     double precioTotal = 0;
+    //le insertamos nuestras ventas a este nodo
     nodoVentas->listaLibro = *listaLibros;
     nodoVentas->ste = NULL;
-    //le insertamos nuestras ventas a este nodo
-    ST_LISTA_LIBROS * aux = *listaLibros;
-    if (aux!=NULL){
-        cantLibros++;
+    ST_LISTA_LIBROS* aux = *listaLibros;
+    while (aux){
         precioTotal = precioTotal + aux->libro.precio;
-    }
-    while ((aux!=NULL)&&(aux->ste!=NULL)){
+        cantLibros++;
         aux = aux->ste;
-        precioTotal = precioTotal + aux->libro.precio;
-        cantLibros++;
     }
     nodoVentas->cantLibros = cantLibros;
     nodoVentas->precioTotal = precioTotal;
     return nodoVentas;
 }
 
-void agregarVentaACola (int factura, ST_LISTA_LIBROS ** listaVenta, ST_COLA_LIBROS * colaVentas){
-    ST_LISTA_VENTAS * nodo = crearNodoVentas(factura, listaVenta);
+void agregarVentaACola (int factura, ST_LISTA_LIBROS** listaVenta, ST_COLA_LIBROS* colaVentas){
+    ST_LISTA_VENTAS* nodo = crearNodoVentas(factura, listaVenta);
     if (colaVentas->inicio == NULL){
         colaVentas->inicio = nodo;
     }
@@ -74,15 +61,15 @@ void agregarVentaACola (int factura, ST_LISTA_LIBROS ** listaVenta, ST_COLA_LIBR
         colaVentas->fin->ste = nodo;
     }
     colaVentas->fin = nodo;
-}
+ }
 
-void agregarVentaALista (int factura, ST_LISTA_LIBROS ** listaVenta, ST_LISTA_VENTAS ** listaRetirosPorSucursal){
+void agregarVentaALista (int factura, ST_LISTA_LIBROS** listaVenta, ST_LISTA_VENTAS ** listaRetirosPorSucursal){
     ST_LISTA_VENTAS* nodoVenta = crearNodoVentas(factura,listaVenta);
     nodoVenta->ste = *listaRetirosPorSucursal;
     *listaRetirosPorSucursal = nodoVenta;
 }
 
-void mostrar5ElementosDeCola (ST_COLA_LIBROS * colaVentas){
+void mostrar5ElementosDeCola (ST_COLA_LIBROS* colaVentas){
     ST_LISTA_VENTAS* aux = colaVentas->inicio;
     int cont = 0;
     while((cont < 5) && (aux != NULL)){
