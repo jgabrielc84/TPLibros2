@@ -57,7 +57,7 @@
 1561846034 d:\users\ghihjik\documents\github\tplibros2\cadena.h
 	"stdbool.h"
 
-1561916028 source:d:\users\ghihjik\documents\github\tplibros2\consola.c
+1561998130 source:d:\users\ghihjik\documents\github\tplibros2\consola.c
 	"libro.h"
 	"consola.h"
 	"venta.h"
@@ -83,11 +83,23 @@
 	<stdio.h>
 	"lista.h"
 
-1561991227 source:d:\users\ghihjik\documents\github\tplibros2\lista.c
+1561998263 source:d:\users\ghihjik\documents\github\tplibros2\lista.c
 	"libro.h"
 	"lista.h"
 
 1561991149 source:d:\users\ghihjik\documents\github\tplibros2\venta.c
 	"venta.h"
 	<time.h>
+
+1561998639 source:d:\users\ghihjik\documents\github\tplibros2\libro.c
+	"libro.h"
+	"consola.h"
+	"lista.h"
+	"cadena.h"
+
+1561993534 source:d:\users\ghihjik\documents\github\tplibros2\main.c
+	<stdio.h>
+	<stdlib.h>
+	"consola.h"
+	"lista.h"
 

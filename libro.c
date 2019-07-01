@@ -27,13 +27,19 @@ ST_LIBRO buscarLibroPorAutorOTituloPorConsola(FILE* ptrArchivo){
         return libro = inicializarLibro();
     }
     int n = -1;
-    while(aux){
-        ++n;
-        printf("[%d] %s, %s %s\n", n, aux->libro.titulo, aux->libro.autor.nombre, aux->libro.autor.apellido);
-        aux = aux->ste;
+    //Si hay mas de 1 libro, dejar elegir al usuario
+    if(aux && aux->ste){
+        while(aux){
+            ++n;
+            printf("[%d] %s, %s %s\n", n, aux->libro.titulo, aux->libro.autor.nombre, aux->libro.autor.apellido);
+            aux = aux->ste;
+        }
+        printf("\n\nSeleccione un libro: ");
+        scanf("%d", &n);
+    }else{
+        //si hay 1 solo, mostrar ese libro unicamente.
+        n = 0;
     }
-    printf("\n\nSeleccione un libro: ");
-    scanf("%d", &n);
     libro = extraerLibroEnPosicion(n, &lista);
     return libro;
 }

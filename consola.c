@@ -106,6 +106,11 @@ void ventaConsola(FILE* ptrArchivo, ST_LISTA_LIBROS** listaVentas, ST_LISTA_VENT
             ingresarArticulosAVenta(ptrArchivo, listaVentas);
             break;
         case 3://Finalizar seleccion de libros
+            if(*listaVentas == NULL){
+                system ("cls");
+                printf("No hay ventas para finalizar.\n");
+                break;
+            }
             system ("cls");
             printearListaLibros(listaVentas);
             factura = generarFactura(listaVentas);
@@ -176,6 +181,7 @@ void gestionEntregaDeLibros(FILE* ptrArchivo, ST_LISTA_VENTAS** listaRetirosPorS
                 printf("\nNo hay libros a retirar.\n");
                 break;
             }
+            printf("\nInicio -> Despachar Libros -> Retirar por sucursal\n");
             mostrarListaVentas(listaRetirosPorSucursal);
             retirosPorSucursal(ptrArchivo, listaRetirosPorSucursal, colaEnviosADomicilio);
             break;

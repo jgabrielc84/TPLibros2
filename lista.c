@@ -103,8 +103,8 @@ void remover5ElementosDeCola (ST_COLA_LIBROS * colaVentas, FILE * ptrArchivo){
 void imprimirVenta (ST_LISTA_VENTAS* ventaSeleccionada){
         printf("\n Venta:\n");
         printf("Factura: %i\n", ventaSeleccionada->IDFactura);
-        printf("Cant. libros: %i\n", ventaSeleccionada->cantLibros);
-        printf("Total: $%4.2f", ventaSeleccionada->precioTotal);
+        printf("Cant. de libros: %i\n", ventaSeleccionada->cantLibros);
+        printf("Total a pagar: %4.2f\n", ventaSeleccionada->precioTotal);
 }
 
 void mostrarListaVentas (ST_LISTA_VENTAS ** listaRetirosPorLocal){
