@@ -81,6 +81,7 @@ void mostrar5ElementosDeCola (ST_COLA_LIBROS* colaVentas){
         aux = aux->ste;
     }
 }
+
 void remover5ElementosDeCola (ST_COLA_LIBROS * colaVentas, FILE * ptrArchivo){
     ST_LISTA_VENTAS* auxVenta;
     ST_LISTA_LIBROS* aux;
@@ -128,34 +129,40 @@ void eliminarVentaDeLista (FILE* ptrArchivo, ST_LISTA_VENTAS** listaVentas){
     printf("\nIngrese el numero de factura correspondiente\n");
     scanf ("%i", &factura);
     ST_LISTA_VENTAS* ventaSeleccionada = buscarEnListaVentas(factura, listaVentas);
-    if (ventaSeleccionada != NULL){
-        system("cls");
-        imprimirVenta(ventaSeleccionada);
-        printf("¿Esta seguro que desea retirar esta factura? Y/N \n");
-        char confirmacion = 'N';
-        while (getchar() != '\n');
-        scanf("%c", &confirmacion);
-        if ((confirmacion == 'Y') || (confirmacion == 'y')) {
-            ST_LISTA_VENTAS * aux = *listaVentas;
-            while ((aux->ste != ventaSeleccionada) && (aux->ste != NULL)){
-                aux = aux->ste;
-            }
-            aux->ste = ventaSeleccionada->ste;
-            if ((aux = ventaSeleccionada)){
-                *listaVentas = NULL;
-            }
-            while (ventaSeleccionada->listaLibro!=NULL){
-                ST_LISTA_LIBROS* auxLibro = ventaSeleccionada->listaLibro;
-                actualizarStockReservadoPorISBN(ptrArchivo, auxLibro->libro.ISBN, -1);
-                actualizarStockDisponiblePorISBN(ptrArchivo, auxLibro->libro.ISBN, -1);
-                ventaSeleccionada->listaLibro = ventaSeleccionada->listaLibro->ste;
-                free(auxLibro);
-            }
-            free(ventaSeleccionada);
-        }
-    }
-    else{
+    if (ventaSeleccionada == NULL){
         printf("\n Elemento no encontrado\n");
         system("pause");
+        return;
+    }
+    system("cls");
+    imprimirVenta(ventaSeleccionada);
+    printf("¿Esta seguro que desea retirar esta factura? Y/N \n");
+    char confirmacion = 'N';
+    while (getchar() != '\n');
+    scanf("%c", &confirmacion);
+    if ((confirmacion == 'Y') || (confirmacion == 'y')) {
+        //delete deberia ser su propia funcion
+        ST_LISTA_VENTAS* aux = *listaVentas;
+        ST_LISTA_VENTAS* nodoAnterior = NULL;
+        while(aux && aux != ventaSeleccionada){
+            nodoAnterior = aux;
+            aux = aux->ste;
+        }
+        if(nodoAnterior == NULL){
+            *listaVentas = (*listaVentas)->ste;
+        }
+        else{
+            nodoAnterior->ste = aux->ste;
+        }
+
+        ST_LISTA_LIBROS* auxLibro;
+        while(ventaSeleccionada->listaLibro){
+            auxLibro = ventaSeleccionada->listaLibro;
+            actualizarStockReservadoPorISBN(ptrArchivo, auxLibro->libro.ISBN, -1);
+            actualizarStockDisponiblePorISBN(ptrArchivo, auxLibro->libro.ISBN, -1);
+            ventaSeleccionada->listaLibro = ventaSeleccionada->listaLibro->ste;
+            free(auxLibro);
+        }
+        free(ventaSeleccionada);
     }
 }

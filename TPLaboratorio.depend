@@ -83,7 +83,7 @@
 	<stdio.h>
 	"lista.h"
 
-1562000435 source:d:\users\ghihjik\documents\github\tplibros2\lista.c
+1562011515 source:d:\users\ghihjik\documents\github\tplibros2\lista.c
 	"libro.h"
 	"lista.h"
 
@@ -91,7 +91,7 @@
 	"venta.h"
 	<time.h>
 
-1562008510 source:d:\users\ghihjik\documents\github\tplibros2\libro.c
+1562008998 source:d:\users\ghihjik\documents\github\tplibros2\libro.c
 	"libro.h"
 	"consola.h"
 	"lista.h"

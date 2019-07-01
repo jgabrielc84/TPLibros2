@@ -8,3 +8,4 @@ bin/Debug/TPLaboratorio.exe
 obj/Debug/consola.o
 obj/Debug/libro.o
 obj/Debug/main.o
+*.txt
