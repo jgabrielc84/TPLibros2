@@ -27,6 +27,7 @@ ST_LIBRO buscarLibroPorAutorOTituloPorConsola(FILE* ptrArchivo){
         return libro = inicializarLibro();
     }
     int n = -1;
+    int seleccion = -1;
     //Si hay mas de 1 libro, dejar elegir al usuario
     if(aux && aux->ste){
         while(aux){
@@ -34,13 +35,15 @@ ST_LIBRO buscarLibroPorAutorOTituloPorConsola(FILE* ptrArchivo){
             printf("[%d] %s, %s %s\n", n, aux->libro.titulo, aux->libro.autor.nombre, aux->libro.autor.apellido);
             aux = aux->ste;
         }
-        printf("\n\nSeleccione un libro: ");
-        scanf("%d", &n);
+        while(seleccion < 0 || seleccion > n){
+            printf("\n\nSeleccione un libro: ");
+            scanf("%d", &seleccion);
+        }
     }else{
         //si hay 1 solo, mostrar ese libro unicamente.
-        n = 0;
+        seleccion = 0;
     }
-    libro = extraerLibroEnPosicion(n, &lista);
+    libro = extraerLibroEnPosicion(seleccion, &lista);
     return libro;
 }
 
@@ -230,6 +233,10 @@ int buscarLibroVacio(FILE* ptrArchivo){
 void crearLibro(FILE* ptrArchivo){
     int cont = buscarLibroVacio(ptrArchivo);
     ST_LIBRO libro = generarLibroPorConsola();
+    if(strcmp(libro.ISBN, "") == 0){
+        printf("Hubo un error al generar un nuevo libro. Intentelo nuevamente\n");
+        return;
+    }
     fseek(ptrArchivo, cont * sizeof(ST_LIBRO), SEEK_SET);
     fwrite(&libro, sizeof(ST_LIBRO), 1, ptrArchivo);
 }

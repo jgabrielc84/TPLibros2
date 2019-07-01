@@ -41,7 +41,8 @@ bool contieneSubCadena(const char* cadenaIngresada, const char* cadenaExistente)
     bool foundSub = false;
     while(*auxSrc && *auxDest){
         if(foundSub){
-            if(*auxSrc == *auxDest){
+            //if(*auxSrc == *auxDest){
+            if((*auxSrc == *auxDest) || ((*auxSrc <= 90) && (*auxSrc >= 65) && (*auxSrc == *auxDest - 32)) || ((*auxSrc <= 122) && (*auxSrc >= 97) && (*auxSrc == *auxDest + 32))){
                 auxSrc++;
                 auxDest++;
             }else{
@@ -49,7 +50,7 @@ bool contieneSubCadena(const char* cadenaIngresada, const char* cadenaExistente)
                 auxSrc = cadenaIngresada;
             }
         }else{
-            if(*auxSrc == *auxDest){
+            if((*auxSrc == *auxDest) || ((*auxSrc <= 90) && (*auxSrc >= 65) && (*auxSrc == *auxDest - 32)) || ((*auxSrc <= 122) && (*auxSrc >= 97) && (*auxSrc == *auxDest + 32))){
                 foundSub = true;
             }else{
                 auxDest++;
