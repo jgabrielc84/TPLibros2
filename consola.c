@@ -114,7 +114,9 @@ void ventaConsola(FILE* ptrArchivo, ST_LISTA_LIBROS** listaVentas, ST_LISTA_VENT
             system ("cls");
             printearListaLibros(listaVentas);
             factura = generarFactura(listaVentas);
-            elegirModoDeEntrega(ptrArchivo, factura, listaVentas, listaRetirosPorSucursal, colaEnviosADomicilio);
+            if(factura != -1){
+                elegirModoDeEntrega(ptrArchivo, factura, listaVentas, listaRetirosPorSucursal, colaEnviosADomicilio);
+            }
             break;
         }
     }
